@@ -1,0 +1,15 @@
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\bin\Debug\W_Form_analyse_get_TrainingDaten.exe.config
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\bin\Debug\W_Form_analyse_get_TrainingDaten.exe
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\bin\Debug\W_Form_analyse_get_TrainingDaten.pdb
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\MainWindow.g.cs
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\App.g.cs
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten_MarkupCompile.cache
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten_MarkupCompile.lref
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\MainWindow.baml
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.g.resources
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.Properties.Resources.resources
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.csproj.GenerateResource.Cache
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.exe
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.pdb
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.csprojAssemblyReference.cache
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.csproj.CoreCompileInputs.cache
