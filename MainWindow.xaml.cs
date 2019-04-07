@@ -29,6 +29,19 @@ namespace W_Form_analyse_get_TrainingDaten
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                swApp.ExitApp();
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
         #region Variable definition
         SldWorks swApp;
         int m;//how many cells
@@ -57,18 +70,7 @@ namespace W_Form_analyse_get_TrainingDaten
         CWResults CWFeatobj = default(CWResults);
         bool isSelected;
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                swApp.ExitApp();
-            }
-            catch (Exception)
-            {
-                
-            }
-            
-        }
+        
 
         float maxDisp = 0.0f;
         float maxStress = 0.0f;
@@ -193,7 +195,32 @@ namespace W_Form_analyse_get_TrainingDaten
 
                 #region geometrie
                 Console.WriteLine("Start creating new Germetrie");
-                swModel = swApp.NewPart();
+                
+                try
+                {
+                    swModel = swApp.NewPart();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("starting SolidWorks");
+                    try
+                    {
+                        swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
+                    }
+                    catch (Exception)
+                    {
+                        swApp = new SldWorks();
+                        swApp.Visible = false;
+                    }
+
+                    //get MaterialLib
+                    strMaterialLib = swApp.GetExecutablePath() + "\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
+
+                    Console.WriteLine("SolidWorks successfully started");
+                    j--;
+                    continue;
+                }
+
                 swModel.Extension.SelectByID("前视基准面", "PLANE", 0, 0, 0, false, 1, null);
                 swModel.InsertSketch2(true);
                 #region sketch
