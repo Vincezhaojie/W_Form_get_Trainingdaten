@@ -29,6 +29,18 @@ namespace W_Form_analyse_get_TrainingDaten
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                swApp.ExitApp();
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
         #region Variable definition
         SldWorks swApp;
         int m;//how many cells
@@ -57,18 +69,7 @@ namespace W_Form_analyse_get_TrainingDaten
         CWResults CWFeatobj = default(CWResults);
         bool isSelected;
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                swApp.ExitApp();
-            }
-            catch (Exception)
-            {
-                
-            }
-            
-        }
+        
 
         float maxDisp = 0.0f;
         float maxStress = 0.0f;
@@ -97,84 +98,37 @@ namespace W_Form_analyse_get_TrainingDaten
 
         private void button_create_Geom_Click(object sender, RoutedEventArgs e)
         {
-            #region a test example, not important
-            m = 9;
-            width = 8 / 1000.0;
-            thickness = 1 / 1000.0;
-            l1 = 30 / 1000.0;
-            l2 = 16 / 1000.0;
-            l3 = 21 / 1000.0;
-            F1 = 1;
-            F2 = 37;
-            F3 = 49;
+            Excel.Range r_m, r_width, r_thickness, r_l1, r_l2, r_l3, r_F1, r_F2, r_F3;
 
-            l4 = l2;
-            l1_ = l1 - 2 * width;
-            l2_ = l2;
-            l3_ = l3 + 2 * width;
-            l4_ = l4;
-            cell_length = l1 + l3;
-            cell_height = l2 + width;
-            #endregion
+            Count = 1140;
 
-            Count = int.Parse(textBox_count.Text);
-            Random randomSeed = new Random();
-            Random random_m = new Random(randomSeed.Next());
-            Random random_width = new Random(randomSeed.Next());
-            Random random_thickness = new Random(randomSeed.Next());
-            Random random_l1 = new Random(randomSeed.Next());
-            Random random_l2 = new Random(randomSeed.Next());
-            Random random_l3 = new Random(randomSeed.Next());
-            Random random_F1 = new Random(randomSeed.Next());
-            Random random_F2 = new Random(randomSeed.Next());
-            Random random_F3 = new Random(randomSeed.Next());
 
-            for (int j = 0; j < Count; j++)
+            for (int j = 2; j < Count; j++)
             {
                 Console.WriteLine(string.Format("---------------------------------now No.{0}", j));
                 
                 #region generate random Data
-                try
-                {
-                    /* change to double
-                    ran_m = random_m.Next(int.Parse(textBox_hm_cells_min.Text), int.Parse(textBox_hm_cellls_max.Text));
-                    ran_width = random_width.Next(int.Parse(textBox_width_min.Text), int.Parse(textBox_width_max.Text));
-                    ran_thickness = random_thickness.Next(int.Parse(textBox_thickness_min.Text), int.Parse(textBox_thickness_max.Text));
-                    ran_l1 = random_l1.Next(int.Parse(textBox_l1_min.Text), int.Parse(textBox_l1_max.Text));
-                    ran_l2 = random_l2.Next(int.Parse(textBox_l2_min.Text), int.Parse(textBox_l2_max.Text));
-                    ran_l3 = random_l3.Next(int.Parse(textBox_l3_min.Text), int.Parse(textBox_l3_max.Text));
-                    ran_F1 = random_F1.Next(int.Parse(textBox_F1_min.Text), int.Parse(textBox_F1_max.Text));
-                    ran_F2 = random_F2.Next(int.Parse(textBox_F2_min.Text), int.Parse(textBox_F2_max.Text));
-                    ran_F3 = random_F3.Next(int.Parse(textBox_F3_min.Text), int.Parse(textBox_F3_max.Text));
-                    */
-                    ran_m = random_m.Next(int.Parse(textBox_hm_cells_min.Text), int.Parse(textBox_hm_cellls_max.Text));
-                    ran_width = random_width.NextDouble() * (int.Parse(textBox_width_max.Text) - int.Parse(textBox_width_min.Text)) + double.Parse(textBox_width_min.Text);
-                    ran_thickness = random_thickness.NextDouble() * (int.Parse(textBox_thickness_max.Text) - int.Parse(textBox_thickness_min.Text)) + double.Parse(textBox_thickness_min.Text);
-                    ran_l1 = random_l1.NextDouble() * (int.Parse(textBox_l1_max.Text) - int.Parse(textBox_l1_min.Text)) + double.Parse(textBox_l1_min.Text);
-                    ran_l2 = random_l2.NextDouble() * (int.Parse(textBox_l2_max.Text) - int.Parse(textBox_l2_min.Text)) + double.Parse(textBox_l2_min.Text);
-                    ran_l3 = random_l3.NextDouble() * (int.Parse(textBox_l3_max.Text) - int.Parse(textBox_l3_min.Text)) + double.Parse(textBox_l3_min.Text);
-                    ran_F1 = random_F1.NextDouble() * (int.Parse(textBox_F1_max.Text) - int.Parse(textBox_F1_min.Text)) + double.Parse(textBox_F1_min.Text);
-                    ran_F2 = random_F2.NextDouble() * (int.Parse(textBox_F2_max.Text) - int.Parse(textBox_F2_min.Text)) + double.Parse(textBox_F2_min.Text);
-                    ran_F3 = random_F3.NextDouble() * (int.Parse(textBox_F3_max.Text) - int.Parse(textBox_F3_min.Text)) + double.Parse(textBox_F3_min.Text);
 
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Input Format Error");
-                    return;
-                }
+                r_m = (Excel.Range)exlSheet.Cells[j, 1];
+                r_width = (Excel.Range)exlSheet.Cells[j, 2];
+                r_thickness = (Excel.Range)exlSheet.Cells[j, 3];
+                r_l1 = (Excel.Range)exlSheet.Cells[j, 4];
+                r_l2 = (Excel.Range)exlSheet.Cells[j, 5];
+                r_l3 = (Excel.Range)exlSheet.Cells[j, 6];
+                r_F1 = (Excel.Range)exlSheet.Cells[j, 7];
+                r_F2 = (Excel.Range)exlSheet.Cells[j, 8];
+                r_F3 = (Excel.Range)exlSheet.Cells[j, 9];
 
+                m = Convert.ToInt32(r_m.Value2);
+                width = (double)(Convert.ToDouble(r_width.Value2) / 1000.0);
+                thickness = (double)(Convert.ToDouble(r_thickness.Value2) / 1000.0);
+                l1 = (double)(Convert.ToDouble(r_l1.Value2) / 1000.0);
+                l2 = (double)(Convert.ToDouble(r_l2.Value2) / 1000.0);
+                l3 = (double)(Convert.ToDouble(r_l3.Value2) / 1000.0);
 
-                m = ran_m;
-                width = (double)(ran_width / 1000.0);
-                thickness = (double)(ran_thickness / 1000.0);
-                l1 = (double)(ran_l1 / 1000.0);
-                l2 = (double)(ran_l2 / 1000.0);
-                l3 = (double)(ran_l3 / 1000.0);
-
-                F1 = (double)ran_F1;
-                F2 = (double)ran_F2;
-                F3 = (double)ran_F3;
+                F1 = Convert.ToDouble(r_F1.Value2);
+                F2 = Convert.ToDouble(r_F2.Value2);
+                F3 = Convert.ToDouble(r_F3.Value2);
 
                 l4 = l2;
                 l1_ = l1 - 2 * width;
@@ -193,7 +147,33 @@ namespace W_Form_analyse_get_TrainingDaten
 
                 #region geometrie
                 Console.WriteLine("Start creating new Germetrie");
-                swModel = swApp.NewPart();
+                try
+                {
+                    swModel = swApp.NewPart();
+                }
+                catch (Exception)
+                {
+                    
+                    Console.WriteLine("starting SolidWorks");
+                    try
+                    {
+                        swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
+                    }
+                    catch (Exception)
+                    {
+                        swApp = new SldWorks();
+                        swApp.Visible = false;
+                    }
+
+                    //get MaterialLib
+                    strMaterialLib = swApp.GetExecutablePath() + "\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
+                    //strMaterialLib = "C:\\Program Files\\SOLIDWORKS Corp\\SOLIDWORKS\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
+                    Console.WriteLine("SolidWorks successfully started");
+                    j--;
+                    continue;
+
+
+                }
                 swModel.Extension.SelectByID("前视基准面", "PLANE", 0, 0, 0, false, 1, null);
                 swModel.InsertSketch2(true);
                 #region sketch
@@ -266,8 +246,18 @@ namespace W_Form_analyse_get_TrainingDaten
                 ActDoc = (CWModelDoc)COSMOSWORKS.ActiveDoc;
 
                 //Create new static study
-                StudyMngr = (CWStudyManager)ActDoc.StudyManager;
-                Study = (CWStudy)StudyMngr.CreateNewStudy("static study", (int)swsAnalysisStudyType_e.swsAnalysisStudyTypeStatic, 0, out errCode);
+                try
+                {
+                    StudyMngr = (CWStudyManager)ActDoc.StudyManager;
+                    Study = (CWStudy)StudyMngr.CreateNewStudy("static study", (int)swsAnalysisStudyType_e.swsAnalysisStudyTypeStatic, 0, out errCode);
+                }
+                catch (Exception)
+                {
+                    errors = swApp.UnloadAddIn(path_to_cosworks_dll);
+                    swApp.CloseAllDocuments(true);
+                    continue;
+
+                }
 
                 //Add materials
                 SolidMgr = Study.SolidManager;
@@ -381,20 +371,20 @@ namespace W_Form_analyse_get_TrainingDaten
 
                    
                     //output to Excel
-                    exlSheet.Cells[j + 2, 1] = m;
-                    exlSheet.Cells[j + 2, 2] = width * 1000;
-                    exlSheet.Cells[j + 2, 3] = thickness * 1000;
-                    exlSheet.Cells[j + 2, 4] = l1 * 1000;
-                    exlSheet.Cells[j + 2, 5] = l2 * 1000;
-                    exlSheet.Cells[j + 2, 6] = l3 * 1000;
-                    exlSheet.Cells[j + 2, 7] = F1;
-                    exlSheet.Cells[j + 2, 8] = F2;
-                    exlSheet.Cells[j + 2, 9] = F3;
-                    exlSheet.Cells[j + 2, 10] = maxStress;
-                    exlSheet.Cells[j + 2, 11] = maxDisp;
+                    exlSheet.Cells[j, 1] = m;
+                    exlSheet.Cells[j, 2] = width * 1000;
+                    exlSheet.Cells[j, 3] = thickness * 1000;
+                    exlSheet.Cells[j, 4] = l1 * 1000;
+                    exlSheet.Cells[j, 5] = l2 * 1000;
+                    exlSheet.Cells[j, 6] = l3 * 1000;
+                    exlSheet.Cells[j, 7] = F1;
+                    exlSheet.Cells[j, 8] = F2;
+                    exlSheet.Cells[j, 9] = F3;
+                    exlSheet.Cells[j, 10] = maxStress;
+                    exlSheet.Cells[j, 11] = maxDisp;
                     if (j % 5 == 0)
                     {
-                        exlBook.Save();//C:\Users\Zhao\Documents\工作簿1.xlsx
+                        exlBook.Save();
                     }
 
                     errors = swApp.UnloadAddIn(path_to_cosworks_dll);
@@ -403,8 +393,7 @@ namespace W_Form_analyse_get_TrainingDaten
                 }
                 #endregion
             }
-            exlBook.SaveCopyAs("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_simulationDaten_" + GetTimeStamp() +"_raw" + ".xlsx");
-            exlBook.Save();//C:\Users\zhaojie\Documents\工作簿1.xlsx
+            exlBook.Save();
             exlApp.Quit();
         }
         private void button_start_SW_Click(object sender, RoutedEventArgs e)
@@ -422,7 +411,7 @@ namespace W_Form_analyse_get_TrainingDaten
 
             //get MaterialLib
             strMaterialLib = swApp.GetExecutablePath() + "\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
-
+            //strMaterialLib = "C:\\Program Files\\SOLIDWORKS Corp\\SOLIDWORKS\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
             Console.WriteLine("SolidWorks successfully started");
         }
 
@@ -430,19 +419,9 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             exlApp = new Microsoft.Office.Interop.Excel.Application();
             exlApp.Visible = false;
-            exlBook = exlApp.Workbooks.Add();
+            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_partE_not_completed.xlsx");
             exlSheet = exlBook.ActiveSheet;
-            exlSheet.Cells[1, 1] = "cells number";
-            exlSheet.Cells[1, 2] = "width(mm)";
-            exlSheet.Cells[1, 3] = "thickness(mm)";
-            exlSheet.Cells[1, 4] = "l1(mm)";
-            exlSheet.Cells[1, 5] = "l2(mm)";
-            exlSheet.Cells[1, 6] = "l3(mm)";
-            exlSheet.Cells[1, 7] = "F1(N)";
-            exlSheet.Cells[1, 8] = "F2(N)";
-            exlSheet.Cells[1, 9] = "F3(N)";
-            exlSheet.Cells[1, 10] = "maxStress(MPa)";
-            exlSheet.Cells[1, 11] = "maxDisp(mm)";
+
         }
 
         #region help function

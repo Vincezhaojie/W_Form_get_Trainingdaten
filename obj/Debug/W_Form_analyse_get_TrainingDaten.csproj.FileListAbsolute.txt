@@ -13,3 +13,4 @@ D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_g
 D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.pdb
 D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.csprojAssemblyReference.cache
 D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\obj\Debug\W_Form_analyse_get_TrainingDaten.csproj.CoreCompileInputs.cache
+D:\TUD\7.Semeter\SA\SA_code\c#\W_Form_analyse_get_TrainingDaten\W_Form_analyse_get_TrainingDaten\bin\Debug\libtensorflow.dll
