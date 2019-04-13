@@ -100,12 +100,11 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             Excel.Range r_m, r_width, r_thickness, r_l1, r_l2, r_l3, r_F1, r_F2, r_F3;
 
-            Count = 1140;
+            Count = 849;
 
-
-            for (int j = 2; j < Count; j++)
+            for (int j = 777; j < Count; j++)
             {
-                Console.WriteLine(string.Format("---------------------------------now No.{0}", j));
+                Console.WriteLine(string.Format("---------------------------------now No.{0}/{1}", j, Count));
                 
                 #region generate random Data
 
@@ -260,7 +259,30 @@ namespace W_Form_analyse_get_TrainingDaten
                 }
 
                 //Add materials
-                SolidMgr = Study.SolidManager;
+                try
+                {
+                    SolidMgr = Study.SolidManager;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("starting SolidWorks");
+                    try
+                    {
+                        swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
+                    }
+                    catch (Exception)
+                    {
+                        swApp = new SldWorks();
+                        swApp.Visible = false;
+                    }
+
+                    //get MaterialLib
+                    strMaterialLib = swApp.GetExecutablePath() + "\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
+                    //strMaterialLib = "C:\\Program Files\\SOLIDWORKS Corp\\SOLIDWORKS\\lang\\english\\sldmaterials\\solidworks materials.sldmat";
+                    Console.WriteLine("SolidWorks successfully started");
+                    j--;
+                    continue;
+                }
                 SolidComp = SolidMgr.GetComponentAt(0, out errCode);
                 SolidBody = SolidComp.GetSolidBodyAt(0, out errCode);
                 intStatus = SolidBody.SetLibraryMaterial(strMaterialLib, "AISI 1020");
@@ -418,8 +440,8 @@ namespace W_Form_analyse_get_TrainingDaten
         private void button_start_Excel_Click(object sender, RoutedEventArgs e)
         {
             exlApp = new Microsoft.Office.Interop.Excel.Application();
-            exlApp.Visible = false;
-            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_partE_not_completed.xlsx");
+            exlApp.Visible = true;
+            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_simulationDaten_1553758068644_clean.xlsx");
             exlSheet = exlBook.ActiveSheet;
 
         }
