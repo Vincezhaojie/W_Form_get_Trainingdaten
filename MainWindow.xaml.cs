@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Threading;
+
 
 using SolidWorks.Interop.cosworks;
 using SolidWorks.Interop.sldworks;
@@ -47,8 +37,8 @@ namespace W_Form_analyse_get_TrainingDaten
         int Count; // how many data
         double width, thickness, l1, l2, l3, F1, F2, F3;
         double l4, l1_, l2_, l3_, l4_, cell_length, cell_height, x_o, y_o, x_o_, y_o_;
-        const double MeshEleSize = 2.0;
-        const double MeshTol = 0.1;
+        const double MeshEleSize = 1;
+        const double MeshTol = 0.5;
         string strMaterialLib = null;
         object[] Disp = null;
         object[] Stress = null;
@@ -88,21 +78,20 @@ namespace W_Form_analyse_get_TrainingDaten
         Excel.Workbook exlBook;
         Excel.Worksheet exlSheet;
 
-
-
         #endregion
         public MainWindow()
         {
             InitializeComponent();
         }
 
+
         private void button_create_Geom_Click(object sender, RoutedEventArgs e)
         {
             Excel.Range r_m, r_width, r_thickness, r_l1, r_l2, r_l3, r_F1, r_F2, r_F3;
 
-            Count = 849;
+            Count = 656;
 
-            for (int j = 777; j < Count; j++)
+            for (int j = 641; j < Count; j++)
             {
                 Console.WriteLine(string.Format("---------------------------------now No.{0}/{1}", j, Count));
                 
@@ -348,14 +337,22 @@ namespace W_Form_analyse_get_TrainingDaten
                     CWMeshObj = null;
 
                     //run analysis
-                    errCode = Study.RunAnalysis();
-                    if (errCode != 0)
+                    try
                     {
-                        Console.WriteLine(string.Format("RunAnalysis errCode = {0}", errCode));
+                        errCode = Study.RunAnalysis();
+                        if (errCode != 0)
+                        {
+                            Console.WriteLine(string.Format("RunAnalysis errCode = {0}", errCode));
+                            Console.WriteLine(string.Format("RunAnalysis failed"));
+                            swApp.CloseAllDocuments(true);
+                            errors = swApp.UnloadAddIn(path_to_cosworks_dll);
+                            Console.WriteLine(string.Format("ready to start a new one"));
+                            continue;
+                        }
+                    }
+                    catch (Exception)
+                    {
                         Console.WriteLine(string.Format("RunAnalysis failed"));
-
-                        
-
                         swApp.CloseAllDocuments(true);
                         errors = swApp.UnloadAddIn(path_to_cosworks_dll);
                         Console.WriteLine(string.Format("ready to start a new one"));
@@ -402,8 +399,8 @@ namespace W_Form_analyse_get_TrainingDaten
                     exlSheet.Cells[j, 7] = F1;
                     exlSheet.Cells[j, 8] = F2;
                     exlSheet.Cells[j, 9] = F3;
-                    exlSheet.Cells[j, 10] = maxStress;
-                    exlSheet.Cells[j, 11] = maxDisp;
+                    exlSheet.Cells[j, 14] = maxStress;
+                    exlSheet.Cells[j, 15] = maxDisp;
                     if (j % 5 == 0)
                     {
                         exlBook.Save();
@@ -441,7 +438,7 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             exlApp = new Microsoft.Office.Interop.Excel.Application();
             exlApp.Visible = true;
-            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_simulationDaten_1553758068644_clean.xlsx");
+            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\工作簿654541.xlsx");
             exlSheet = exlBook.ActiveSheet;
 
         }
