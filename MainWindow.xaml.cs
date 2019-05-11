@@ -177,6 +177,7 @@ namespace W_Form_analyse_get_TrainingDaten
                 F1 = (double)ran_F1;
                 F2 = (double)ran_F2;
                 F3 = (double)ran_F3;
+                F3 = 0;
 
                 l4 = l2;
                 l1_ = l1 - 2 * width;
@@ -430,7 +431,7 @@ namespace W_Form_analyse_get_TrainingDaten
                 }
                 #endregion
             }
-            exlBook.SaveCopyAs("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_simulationDaten_" + GetTimeStamp() +"_raw" + ".xlsx");
+            exlBook.SaveCopyAs("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\W_Form_simulationDaten_" + GetTimeStamp() +"_F3=0" + ".xlsx");
             exlBook.Save();//C:\Users\zhaojie\Documents\工作簿1.xlsx
             exlApp.Quit();
         }
