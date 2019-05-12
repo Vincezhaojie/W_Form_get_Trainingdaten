@@ -37,8 +37,8 @@ namespace W_Form_analyse_get_TrainingDaten
         int Count; // how many data
         double width, thickness, l1, l2, l3, F1, F2, F3;
         double l4, l1_, l2_, l3_, l4_, cell_length, cell_height, x_o, y_o, x_o_, y_o_;
-        const double MeshEleSize = 1;
-        const double MeshTol = 0.5;
+        const double MeshEleSize = 3;
+        const double MeshTol = 0.8;
         string strMaterialLib = null;
         object[] Disp = null;
         object[] Stress = null;
@@ -89,9 +89,9 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             Excel.Range r_m, r_width, r_thickness, r_l1, r_l2, r_l3, r_F1, r_F2, r_F3;
 
-            Count = 656;
+            Count = 1292;
 
-            for (int j = 641; j < Count; j++)
+            for (int j = 1238; j < Count; j++)
             {
                 Console.WriteLine(string.Format("---------------------------------now No.{0}/{1}", j, Count));
                 
@@ -399,8 +399,8 @@ namespace W_Form_analyse_get_TrainingDaten
                     exlSheet.Cells[j, 7] = F1;
                     exlSheet.Cells[j, 8] = F2;
                     exlSheet.Cells[j, 9] = F3;
-                    exlSheet.Cells[j, 14] = maxStress;
-                    exlSheet.Cells[j, 15] = maxDisp;
+                    exlSheet.Cells[j, 10] = maxStress;
+                    exlSheet.Cells[j, 11] = maxDisp;
                     if (j % 5 == 0)
                     {
                         exlBook.Save();
@@ -438,7 +438,7 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             exlApp = new Microsoft.Office.Interop.Excel.Application();
             exlApp.Visible = true;
-            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\工作簿654541.xlsx");
+            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\F3=0\\W_Form_F3=0_partA_inter_not_completed.xlsx");
             exlSheet = exlBook.ActiveSheet;
 
         }
