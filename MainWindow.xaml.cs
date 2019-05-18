@@ -89,9 +89,9 @@ namespace W_Form_analyse_get_TrainingDaten
         {
             Excel.Range r_m, r_width, r_thickness, r_l1, r_l2, r_l3, r_F1, r_F2, r_F3;
 
-            Count = 1292;
+            Count = 902;
 
-            for (int j = 1238; j < Count; j++)
+            for (int j = 875; j < Count; j++)
             {
                 Console.WriteLine(string.Format("---------------------------------now No.{0}/{1}", j, Count));
                 
@@ -437,8 +437,8 @@ namespace W_Form_analyse_get_TrainingDaten
         private void button_start_Excel_Click(object sender, RoutedEventArgs e)
         {
             exlApp = new Microsoft.Office.Interop.Excel.Application();
-            exlApp.Visible = true;
-            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\F3=0\\W_Form_F3=0_partA_inter_not_completed.xlsx");
+            exlApp.Visible = false;
+            exlBook = exlApp.Workbooks.Open("D:\\TUD\\7.Semeter\\SA\\SA_code\\c#\\W_Form_analyse_get_TrainingDaten\\F3=0\\W_Form_F3=0_partE_inter_not_completed.xlsx");
             exlSheet = exlBook.ActiveSheet;
 
         }
